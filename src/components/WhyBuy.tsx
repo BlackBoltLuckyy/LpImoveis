@@ -1,5 +1,5 @@
 import { Sparkles, HeartHandshake, LifeBuoy, Building2 } from "lucide-react";
-import varanda from "../assets/varanda.svg";
+import corretor from "../assets/corretor.jpg";
 
 interface Advantage {
   icon: typeof Sparkles;
@@ -44,8 +44,12 @@ export default function WhyBuy() {
           </div>
         </div>
 
-        <div className="relative overflow-hidden rounded-2xl shadow-xl shadow-black/10">
-          <img src={varanda} alt="Varanda com vista para a cidade" className="h-full w-full object-cover" />
+        <div className="relative min-h-[400px] overflow-hidden rounded-2xl shadow-xl shadow-black/10">
+          <img
+            src={corretor}
+            alt="Phelipe Assis com clientes na entrega das chaves"
+            className="h-full w-full object-cover object-top"
+          />
           <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy/80 via-navy/20 to-transparent p-6">
             <p className="font-sora text-lg font-semibold text-white">
               Lançamentos com alto potencial de valorização

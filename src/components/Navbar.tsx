@@ -13,7 +13,7 @@ const navLinks: NavLink[] = [
   { label: "Contato", href: "#contato" },
 ];
 
-const WHATSAPP_URL = "https://wa.me/5511999999999";
+const WHATSAPP_URL = "https://wa.me/5519983153649";
 
 export default function Navbar() {
   return (

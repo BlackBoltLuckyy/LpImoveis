@@ -1,7 +1,7 @@
-import { MapPin, BedDouble, Car, Sparkles, ArrowRight } from "lucide-react";
-import predio1 from "../assets/predio1.svg";
-import predio2 from "../assets/predio2.svg";
-import predio3 from "../assets/predio3.svg";
+import { MapPin, BedDouble, Car, Sparkles, ArrowRight, MessageCircle } from "lucide-react";
+import predio1 from "../assets/predio1.jpg";
+import predio2 from "../assets/predio2.jpg";
+import predio3 from "../assets/predio3.jpg";
 
 interface Launch {
   img: string;
@@ -10,36 +10,39 @@ interface Launch {
   dorms: string;
   parking: string;
   leisure: string;
-  price: string;
 }
+
+const WHATSAPP = "5519983153649"; // número real do corretor
+
+const waLink = (name: string) =>
+  `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(
+    `Olá Phelipe! Tenho interesse no ${name}. Pode me passar mais informações?`
+  )}`;
 
 const launches: Launch[] = [
   {
     img: predio1,
-    name: "Reserva Prime",
-    location: "Jardim América - São Paulo/SP",
+    name: "Horizon Limeira",
+    location: "Limeira/SP",
     dorms: "2 e 3 dorms",
     parking: "1 a 2 vagas",
     leisure: "Lazer completo",
-    price: "450.000",
   },
   {
     img: predio2,
-    name: "Vista do Parque",
-    location: "Vila Nova Conceição - São Paulo/SP",
+    name: "Grand Palazzo",
+    location: "Limeira/SP",
     dorms: "1, 2 e 3 dorms",
     parking: "1 a 2 vagas",
     leisure: "Lazer completo",
-    price: "680.000",
   },
   {
     img: predio3,
-    name: "Alto do Vale",
-    location: "Barra Funda - São Paulo/SP",
+    name: "Residencial Lunare",
+    location: "Limeira/SP",
     dorms: "2 e 3 dorms",
     parking: "1 a 2 vagas",
     leisure: "Rooftop e lazer",
-    price: "520.000",
   },
 ];
 
@@ -94,17 +97,15 @@ export default function Launches() {
                     {l.leisure}
                   </span>
                 </div>
-                <div className="mt-auto flex items-end justify-between pt-6">
-                  <div>
-                    <p className="text-xs text-white/55">A partir de</p>
-                    <p className="mt-0.5 font-sora font-bold">
-                      R$ <span className="text-2xl">{l.price}</span>
-                    </p>
-                  </div>
-                  <a href="#contato" className="inline-flex items-center gap-1.5 border-b border-gold pb-0.5 text-sm font-semibold text-gold">
-                    Saiba mais <ArrowRight size={15} />
-                  </a>
-                </div>
+                <a
+                  href={waLink(l.name)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-auto flex items-center justify-center gap-2 rounded-xl bg-[#1fab5a] px-4 py-3 font-sora text-[15px] font-bold text-white transition-colors hover:bg-[#189a4f]"
+                >
+                  <MessageCircle size={19} />
+                  Consultar no WhatsApp
+                </a>
               </div>
             </article>
           ))}

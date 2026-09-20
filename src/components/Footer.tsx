@@ -13,7 +13,7 @@ const seals: Seal[] = [
 
 const socials = [
   { icon: Camera, label: "Instagram", href: "https://instagram.com" },
-  { icon: MessageCircle, label: "WhatsApp", href: "https://wa.me/5511999999999" },
+  { icon: MessageCircle, label: "WhatsApp", href: "https://wa.me/5519983153649" },
 ];
 
 export default function Footer() {
