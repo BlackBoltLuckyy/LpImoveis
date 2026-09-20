@@ -7,7 +7,7 @@ interface Seal {
 
 const seals: Seal[] = [
   { icon: ShieldCheck, label: "Transparência" },
-  { icon: MapPin, label: "Atendimento em São Paulo e região" },
+  { icon: MapPin, label: "Atendimento em Limeira" },
   { icon: Award, label: "Experiência e credibilidade" },
 ];
 

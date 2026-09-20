@@ -1,4 +1,4 @@
-import { type FormEvent, useState } from "react";
+import { type SubmitEvent, useState } from "react";
 import { Rocket, BadgePercent, ShieldCheck, User, Phone, Mail, Home as HomeIcon } from "lucide-react";
 import heroBg from "../assets/hero-bg.svg";
 
@@ -20,12 +20,36 @@ const interestOptions = [
   "Investimento",
 ];
 
+const WHATSAPP = "5519983153649"; // número real do corretor
+
 export default function Hero() {
   const [submitted, setSubmitted] = useState(false);
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
+    const form = event.currentTarget;
+    const data = new FormData(form);
+    const name = data.get("name") as string;
+    const whatsapp = data.get("whatsapp") as string;
+    const email = data.get("email") as string;
+    const interest = data.get("interest") as string;
+
+    const lines = [
+      "Olá Phelipe! Gostaria de agendar uma visita.",
+      `Nome: ${name}`,
+      `WhatsApp: ${whatsapp}`,
+    ];
+    if (email) lines.push(`E-mail: ${email}`);
+    lines.push(`Interesse: ${interest}`);
+
+    window.open(
+      `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(lines.join("\n"))}`,
+      "_blank",
+      "noopener,noreferrer"
+    );
+
     setSubmitted(true);
+    form.reset();
   }
 
   return (
@@ -129,11 +153,11 @@ export default function Hero() {
               type="submit"
               className="mt-2 rounded-xl bg-gradient-to-b from-gold-light to-gold-dark py-3.5 text-sm font-bold tracking-wide text-[#2a1c07] transition-transform hover:scale-[1.01] active:scale-[0.99]"
             >
-              {submitted ? "Recebemos seu pedido!" : "Quero agendar uma visita"}
+              {submitted ? "Enviado para o WhatsApp!" : "Quero agendar uma visita"}
             </button>
 
             <p className="text-center text-xs text-white/50">
-              Seus dados estão seguros.
+              Seus dados são enviados direto no WhatsApp do corretor.
             </p>
           </form>
         </div>
