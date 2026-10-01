@@ -1,4 +1,5 @@
-import { ShieldCheck, MapPin, Award, Camera, MessageCircle } from "lucide-react";
+import { ShieldCheck, MapPin, Award, MessageCircle } from "lucide-react";
+import InstagramIcon, { INSTAGRAM_URL } from "./InstagramIcon";
 
 interface Seal {
   icon: typeof ShieldCheck;
@@ -12,7 +13,7 @@ const seals: Seal[] = [
 ];
 
 const socials = [
-  { icon: Camera, label: "Instagram", href: "https://instagram.com" },
+  { icon: InstagramIcon, label: "Instagram", href: INSTAGRAM_URL },
   { icon: MessageCircle, label: "WhatsApp", href: "https://wa.me/5519983153649" },
 ];
 

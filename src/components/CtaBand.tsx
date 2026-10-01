@@ -1,4 +1,5 @@
 import { MessageCircle } from "lucide-react";
+import InstagramIcon, { INSTAGRAM_URL } from "./InstagramIcon";
 import skyline from "../assets/skyline.svg";
 
 const WHATSAPP_URL = "https://wa.me/5519983153649";
@@ -34,6 +35,15 @@ export default function CtaBand() {
           >
             <MessageCircle size={18} />
             Falar no WhatsApp
+          </a>
+          <a
+            href={INSTAGRAM_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-white/80 transition-colors hover:text-gold"
+          >
+            <InstagramIcon size={18} />
+            @phelipeassis_corretor
           </a>
         </div>
       </div>

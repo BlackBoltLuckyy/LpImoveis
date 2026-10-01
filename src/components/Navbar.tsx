@@ -1,4 +1,5 @@
 import { Home, MessageCircle } from "lucide-react";
+import InstagramIcon, { INSTAGRAM_URL } from "./InstagramIcon";
 
 interface NavLink {
   label: string;
@@ -45,15 +46,26 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <a
-          href={WHATSAPP_URL}
-          target="_blank"
-          rel="noreferrer"
-          className="inline-flex items-center gap-2 rounded-full border border-gold/60 bg-gold/10 px-4 py-2.5 text-sm font-semibold text-gold transition-colors hover:bg-gold/20"
-        >
-          <MessageCircle size={17} />
-          <span className="hidden sm:inline">Falar no WhatsApp</span>
-        </a>
+        <div className="flex items-center gap-3">
+          <a
+            href={INSTAGRAM_URL}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Instagram"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-gold/60 bg-gold/10 text-gold transition-colors hover:bg-gold/20"
+          >
+            <InstagramIcon size={17} />
+          </a>
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-full border border-gold/60 bg-gold/10 px-4 py-2.5 text-sm font-semibold text-gold transition-colors hover:bg-gold/20"
+          >
+            <MessageCircle size={17} />
+            <span className="hidden sm:inline">Falar no WhatsApp</span>
+          </a>
+        </div>
       </div>
     </header>
   );
