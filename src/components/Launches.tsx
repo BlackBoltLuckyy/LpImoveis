@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MapPin, BedDouble, Car, Sparkles, ArrowRight, MessageCircle, Eye } from "lucide-react";
+import { MapPin, BedDouble, Car, Sparkles, ArrowRight, MessageCircle } from "lucide-react";
 import predio1 from "../assets/predio1.jpg";
 import predio2 from "../assets/predio2.jpg";
 import predio3 from "../assets/predio3.jpg";
@@ -34,7 +34,7 @@ const launches: Launch[] = [
     location: "Limeira/SP",
     dorms: "2 e 3 dorms",
     parking: "1 a 2 vagas",
-    leisure: "Lazer completo",
+    leisure: "Completo",
     area: "58 a 92 m²",
     desc: "Apartamentos plantejados para famílias que buscam conforto e praticidade, com plantas flexíveis e acabamentos de alto padrão em uma das regiões mais valorizadas de Limeira.",
     features: [
@@ -53,7 +53,7 @@ const launches: Launch[] = [
     location: "Limeira/SP",
     dorms: "1, 2 e 3 dorms",
     parking: "1 a 2 vagas",
-    leisure: "Lazer completo",
+    leisure: "Completo",
     area: "45 a 98 m²",
     desc: "Empreendimento com arquitetura sofisticada e ampla área de lazer entre torres, pensado para quem valoriza qualidade de vida sem abrir mão da localização estratégica.",
     features: [
@@ -72,7 +72,7 @@ const launches: Launch[] = [
     location: "Limeira/SP",
     dorms: "2 e 3 dorms",
     parking: "1 a 2 vagas",
-    leisure: "Rooftop e lazer",
+    leisure: "Rooftop",
     area: "52 a 87 m²",
     desc: "Torres modernas com rooftop exclusivo e vista privilegiada, unindo design contemporâneo e infraestrutura completa de lazer para o dia a dia da sua família.",
     features: [
@@ -97,73 +97,94 @@ export default function Launches() {
   };
 
   return (
-    <section id="lancamentos" className="bg-navy-800 px-8 py-20">
-      <div className="mx-auto max-w-6xl">
-        <div className="flex flex-wrap items-end justify-between gap-5">
+    <section id="lancamentos" className="launches px-4 py-20 font-manrope sm:px-8 md:py-24">
+      <div className="mx-auto max-w-[1280px]">
+        <div className="flex flex-wrap items-end justify-between gap-7">
           <div>
-            <p className="mb-3 text-[13px] font-semibold tracking-[3px] text-gold">
-              LANÇAMENTOS EM DESTAQUE
+            <p className="launches-eyebrow mb-4 flex items-center gap-3 text-[12px] font-bold uppercase tracking-[0.2em] text-[#D9B55F]">
+              Lançamentos em Limeira
             </p>
-            <h2 className="font-sora text-3xl font-bold leading-tight md:text-[2.6rem]">
+            <h2 className="text-[clamp(34px,3.6vw,54px)] font-extrabold leading-[1.04] tracking-[-0.025em] text-[#F5F8FB]">
               Grandes oportunidades
               <br />
-              ao seu alcance
+              <span className="font-instrument text-[1.16em] font-normal italic tracking-normal text-[#D9B55F]">
+                ao seu alcance
+              </span>
             </h2>
           </div>
-          <a href="#contato" className="inline-flex items-center gap-2 font-semibold text-gold hover:text-gold-light">
-            Ver todos os lançamentos <ArrowRight size={17} />
+          <a
+            href="#contato"
+            className="launches-all inline-flex min-h-[50px] items-center gap-2.5 rounded-full border border-[rgba(217,181,95,0.32)] px-6 py-[15px] text-[14.5px] font-bold text-[#D9B55F]"
+          >
+            Ver todos os lançamentos
+            <ArrowRight size={17} strokeWidth={2.2} aria-hidden="true" />
           </a>
         </div>
 
-        <div className="mt-10 grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-6">
-          {launches.map((l) => (
-            <article
-              key={l.name}
-              onClick={() => openLaunch(l)}
-              className="flex cursor-pointer flex-col overflow-hidden rounded-2xl border border-white/5 bg-[#111c2a] transition-colors hover:border-gold/40"
-            >
-              <div className="relative h-48">
-                <img src={l.img} alt={l.name} className="h-full w-full object-cover" />
-                <span className="absolute left-4 top-4 rounded-md bg-gradient-to-b from-gold-light to-gold-dark px-3 py-1.5 text-[11px] font-bold tracking-widest text-[#2a1c07]">
-                  LANÇAMENTO
-                </span>
-                <span className="absolute bottom-4 right-4 flex items-center gap-1.5 rounded-full bg-navy/70 px-3 py-1.5 text-[11px] font-semibold text-white backdrop-blur-sm">
-                  <Eye size={13} className="text-gold" />
-                  Ver detalhes
-                </span>
-              </div>
-              <div className="flex flex-1 flex-col p-6">
-                <h3 className="font-sora text-xl font-semibold">{l.name}</h3>
-                <p className="mt-2 flex items-center gap-2 text-sm text-white/65">
-                  <MapPin size={15} className="text-gold" /> {l.location}
-                </p>
-                <div className="mt-4 flex flex-wrap gap-4 border-t border-white/10 pt-4 text-xs text-white/70">
-                  <span className="flex items-center gap-1.5">
-                    <BedDouble size={15} className="text-gold" />
-                    {l.dorms}
+        <div className="mt-12 grid grid-cols-[repeat(auto-fit,minmax(min(300px,100%),1fr))] gap-7">
+          {launches.map((l) => {
+            const specs = [
+              { icon: BedDouble, value: l.dorms.replace(/ dorms$/, ""), label: "Dormitórios" },
+              { icon: Car, value: l.parking.replace(/ vagas$/, ""), label: "Vagas" },
+              { icon: Sparkles, value: l.leisure, label: "Lazer" },
+            ];
+
+            return (
+              <article key={l.name} className="launch-card flex flex-col overflow-hidden">
+                <div className="relative aspect-[16/10] overflow-hidden">
+                  <img src={l.img} alt={`Fachada do ${l.name}`} className="h-full w-full object-cover" />
+                  <div className="launch-scrim absolute inset-0" aria-hidden="true" />
+                  <span className="absolute left-4 top-4 rounded-full bg-gradient-to-br from-[#EBCF8A] to-[#D9B55F] px-[13px] py-[7px] text-[10.5px] font-extrabold uppercase tracking-[0.14em] text-[#1A1407]">
+                    Lançamento
                   </span>
-                  <span className="flex items-center gap-1.5">
-                    <Car size={15} className="text-gold" />
-                    {l.parking}
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <Sparkles size={15} className="text-gold" />
-                    {l.leisure}
-                  </span>
+                  <div className="absolute inset-x-5 bottom-4">
+                    <h3 className="text-[25px] font-bold leading-tight text-white">{l.name}</h3>
+                    <p className="mt-1.5 flex items-center gap-1.5 text-[13.5px] font-medium text-[#C9D5E1]">
+                      <MapPin size={15} className="text-[#D9B55F]" aria-hidden="true" />
+                      {l.location}
+                    </p>
+                  </div>
                 </div>
-                <a
-                  href={waLink(l.name)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e) => e.stopPropagation()}
-                  className="mt-auto flex items-center justify-center gap-2 rounded-xl bg-[#1fab5a] px-4 py-3 font-sora text-[15px] font-bold text-white transition-colors hover:bg-[#189a4f]"
-                >
-                  <MessageCircle size={19} />
-                  Consultar no WhatsApp
-                </a>
-              </div>
-            </article>
-          ))}
+
+                <div className="flex flex-1 flex-col gap-5 px-[22px] pb-6 pt-[22px]">
+                  <ul className="grid grid-cols-3">
+                    {specs.map(({ icon: Icon, value, label }, i) => (
+                      <li
+                        key={label}
+                        className={`flex flex-col gap-1.5 ${i > 0 ? "border-l border-[rgba(255,255,255,0.09)] pl-4" : ""} ${i < specs.length - 1 ? "pr-4" : ""}`}
+                      >
+                        <Icon size={18} className="text-[#D9B55F]" aria-hidden="true" />
+                        <span className="text-[15px] font-bold text-[#ECF2F8]">{value}</span>
+                        <span className="text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#93A5B8]">
+                          {label}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="mt-auto flex gap-2.5">
+                    <a
+                      href={waLink(l.name)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="launch-whats flex min-h-[50px] flex-1 items-center justify-center gap-2 rounded-xl px-4 text-[14.5px] font-extrabold text-[#06240F]"
+                    >
+                      <MessageCircle size={19} strokeWidth={2.2} aria-hidden="true" />
+                      Consultar no WhatsApp
+                    </a>
+                    <button
+                      type="button"
+                      onClick={() => openLaunch(l)}
+                      aria-label={`Ver detalhes do ${l.name}`}
+                      className="launch-details flex h-[50px] w-[50px] shrink-0 items-center justify-center rounded-xl border border-[rgba(217,181,95,0.30)] text-[#D9B55F]"
+                    >
+                      <ArrowRight size={19} strokeWidth={2.2} aria-hidden="true" />
+                    </button>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </div>
 

@@ -1,5 +1,7 @@
-import { Home, MessageCircle } from "lucide-react";
+import { useState } from "react";
+import { Home, Menu, MessageCircle, X } from "lucide-react";
 import InstagramIcon, { INSTAGRAM_URL } from "./InstagramIcon";
+import "./Navbar.css";
 
 interface NavLink {
   label: string;
@@ -17,56 +19,76 @@ const navLinks: NavLink[] = [
 const WHATSAPP_URL = "https://wa.me/5519983153649";
 
 export default function Navbar() {
-  return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-navy/70 backdrop-blur-md">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <a href="#top" className="flex items-center gap-3">
-          <span className="flex h-11 w-11 items-center justify-center rounded-lg border border-gold/60">
-            <Home size={20} className="text-gold" strokeWidth={1.6} />
-          </span>
-          <span className="flex flex-col leading-none">
-            <span className="font-sora text-base font-bold tracking-wide text-white">
-              PHELIPE ASSIS
-            </span>
-            <span className="mt-1 text-[10px] font-semibold tracking-[3px] text-gold">
-              CORRETOR DE IMÓVEIS
-            </span>
-          </span>
-        </a>
+  const [menuOpen, setMenuOpen] = useState(false);
 
-        <nav className="hidden items-center gap-8 lg:flex">
-          {navLinks.map((link) => (
+  return (
+    <>
+      <header className="site-header">
+        <div className="site-header__inner">
+          <a href="#top" className="brand">
+            <span className="brand__mark">
+              <Home size={21} strokeWidth={1.6} aria-hidden="true" />
+            </span>
+            <span className="brand__text">
+              <span className="brand__name">PHELIPE ASSIS</span>
+              <span className="brand__role">CORRETOR DE IMÓVEIS</span>
+            </span>
+          </a>
+
+          <nav className="site-nav" aria-label="Principal">
+            {navLinks.map((link) => (
+              <a key={link.href} href={link.href}>
+                {link.label}
+              </a>
+            ))}
+          </nav>
+
+          <div className="site-header__actions">
             <a
-              key={link.href}
-              href={link.href}
-              className="text-sm font-medium text-white/80 transition-colors hover:text-gold"
+              href={INSTAGRAM_URL}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Instagram do Phelipe Assis"
+              className="icon-btn"
             >
+              <InstagramIcon size={18} />
+            </a>
+            <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="btn-outline">
+              <MessageCircle size={17} strokeWidth={1.7} aria-hidden="true" />
+              Falar no WhatsApp
+            </a>
+            <button
+              type="button"
+              className="icon-btn menu-toggle"
+              aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
+              aria-expanded={menuOpen}
+              aria-controls="mobile-nav"
+              onClick={() => setMenuOpen((open) => !open)}
+            >
+              {menuOpen ? (
+                <X size={20} strokeWidth={1.7} aria-hidden="true" />
+              ) : (
+                <Menu size={20} strokeWidth={1.7} aria-hidden="true" />
+              )}
+            </button>
+          </div>
+        </div>
+
+        <nav id="mobile-nav" className="mobile-nav" aria-label="Menu" hidden={!menuOpen}>
+          {navLinks.map((link) => (
+            <a key={link.href} href={link.href} onClick={() => setMenuOpen(false)}>
               {link.label}
             </a>
           ))}
         </nav>
+      </header>
 
-        <div className="flex items-center gap-3">
-          <a
-            href={INSTAGRAM_URL}
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Instagram"
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-gold/60 bg-gold/10 text-gold transition-colors hover:bg-gold/20"
-          >
-            <InstagramIcon size={17} />
-          </a>
-          <a
-            href={WHATSAPP_URL}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-full border border-gold/60 bg-gold/10 px-4 py-2.5 text-sm font-semibold text-gold transition-colors hover:bg-gold/20"
-          >
-            <MessageCircle size={17} />
-            <span className="hidden sm:inline">Falar no WhatsApp</span>
-          </a>
-        </div>
+      <div className="mobile-bar">
+        <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="btn-outline">
+          <MessageCircle size={18} strokeWidth={1.7} aria-hidden="true" />
+          Falar no WhatsApp
+        </a>
       </div>
-    </header>
+    </>
   );
 }

@@ -1,16 +1,5 @@
-import { ShieldCheck, MapPin, Award, MessageCircle } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 import InstagramIcon, { INSTAGRAM_URL } from "./InstagramIcon";
-
-interface Seal {
-  icon: typeof ShieldCheck;
-  label: string;
-}
-
-const seals: Seal[] = [
-  { icon: ShieldCheck, label: "Transparência" },
-  { icon: MapPin, label: "Atendimento em Limeira" },
-  { icon: Award, label: "Experiência e credibilidade" },
-];
 
 const socials = [
   { icon: InstagramIcon, label: "Instagram", href: INSTAGRAM_URL },
@@ -21,16 +10,7 @@ export default function Footer() {
   return (
     <footer className="bg-navy-900 px-8 py-14">
       <div className="mx-auto max-w-6xl">
-        <div className="grid grid-cols-1 gap-8 border-b border-white/10 pb-10 sm:grid-cols-3">
-          {seals.map((seal) => (
-            <div key={seal.label} className="flex items-center gap-3">
-              <seal.icon size={20} className="shrink-0 text-gold" />
-              <span className="text-sm font-medium text-white/75">{seal.label}</span>
-            </div>
-          ))}
-        </div>
-
-        <div className="flex flex-col items-center justify-between gap-6 pt-8 sm:flex-row">
+        <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
           <div className="text-center sm:text-left">
             <p className="font-sora text-sm font-bold tracking-wide text-white">
               PHELIPE ASSIS

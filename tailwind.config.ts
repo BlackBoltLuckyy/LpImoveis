@@ -13,6 +13,8 @@ export default {
         sora: ["Sora", "sans-serif"],
         jakarta: ["'Plus Jakarta Sans'", "sans-serif"],
         script: ["'Marck Script'", "cursive"],
+        manrope: ["Manrope", "sans-serif"],
+        instrument: ["'Instrument Serif'", "serif"],
       },
     },
   },

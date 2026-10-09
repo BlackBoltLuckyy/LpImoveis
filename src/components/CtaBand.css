@@ -1,0 +1,221 @@
+.cta {
+  --bg: #0a0e13;
+  --surface: #131c25;
+  --line: #1b242f;
+  --line-2: #19222d;
+  --text: #f7f3ec;
+  --text-2: #d9dfe6;
+  --muted: #8e99a6;
+  --gold: #e3b778;
+  --on-gold: #11161c;
+  --wa: #58e08e;
+  --wa-border: #2e6e4a;
+
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--bg);
+  border-top: 1px solid var(--line-2);
+  color: var(--text);
+  font-family: "Schibsted Grotesk", sans-serif;
+}
+
+/* Silhueta da cidade, ancorada no rodapé da seção */
+.cta__city {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: -1;
+  display: block;
+  width: 100%;
+  height: 330px;
+  pointer-events: none;
+}
+
+.cta__inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 104px 32px 0;
+  text-align: center;
+}
+
+.cta__eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.cta__eyebrow::before,
+.cta__eyebrow::after {
+  content: "";
+  width: 36px;
+  height: 1px;
+  flex-shrink: 0;
+  background: var(--gold);
+  opacity: 0.55;
+}
+
+.cta__title {
+  max-width: 17ch;
+  margin: 22px auto 0;
+  font-family: "Fraunces", serif;
+  font-weight: 600;
+  font-size: 62px;
+  line-height: 1.05;
+  letter-spacing: -0.022em;
+  text-wrap: balance;
+  color: var(--text);
+}
+
+.cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.cta__btn {
+  min-height: 58px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 34px;
+  border-radius: 999px;
+  font-size: 16.5px;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    transform 0.25s ease,
+    filter 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.cta__btn--primary {
+  background: var(--gold);
+  color: var(--on-gold);
+  box-shadow: 0 10px 30px rgba(227, 183, 120, 0.14);
+}
+
+.cta__btn--primary svg {
+  transition: transform 0.25s ease;
+}
+
+.cta__btn--primary:hover {
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+}
+
+.cta__btn--primary:hover svg {
+  transform: translateX(4px);
+}
+
+.cta__btn--whatsapp {
+  border: 1px solid var(--wa-border);
+  background: rgba(88, 224, 142, 0.07);
+  color: var(--wa);
+}
+
+.cta__btn--whatsapp:hover {
+  border-color: var(--wa);
+  background: rgba(88, 224, 142, 0.12);
+}
+
+.cta__instagram {
+  min-height: 56px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding: 0 12px;
+  font-size: 15px;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.cta__instagram:hover {
+  color: var(--text-2);
+}
+
+.cta a:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+/* Faixa de selos */
+.cta__seals {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 96px 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+  /* Garante contraste do texto sobre as janelas do desenho */
+  background: rgba(10, 14, 19, 0.78);
+}
+
+.cta__seal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 34px 20px;
+  font-size: 15.5px;
+  font-weight: 500;
+  color: var(--text-2);
+}
+
+.cta__seal + .cta__seal {
+  border-left: 1px solid var(--line);
+}
+
+.cta__seal svg {
+  flex-shrink: 0;
+  color: var(--gold);
+}
+
+@media (max-width: 759px) {
+  .cta__inner {
+    padding: 80px 22px 0;
+  }
+
+  .cta__title {
+    font-size: 38px;
+  }
+
+  .cta__actions {
+    flex-direction: column;
+  }
+
+  .cta__btn {
+    width: 100%;
+    min-height: 56px;
+  }
+
+  .cta__seals {
+    grid-template-columns: 1fr;
+    margin-top: 64px;
+  }
+
+  .cta__seal {
+    padding: 22px 20px;
+  }
+
+  .cta__seal + .cta__seal {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .cta__city {
+    height: 240px;
+  }
+}
