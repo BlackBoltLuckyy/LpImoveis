@@ -97,24 +97,24 @@ export default function Launches() {
   };
 
   return (
-    <section id="lancamentos" className="launches px-4 py-20 font-manrope sm:px-8 md:py-24">
+    <section id="lancamentos" className="launches px-4 py-20 sm:px-8 md:py-24">
       <div className="mx-auto max-w-[1280px]">
         <div className="flex flex-wrap items-end justify-between gap-7">
           <div>
-            <p className="launches-eyebrow mb-4 flex items-center gap-3 text-[12px] font-bold uppercase tracking-[0.2em] text-[#D9B55F]">
+            <p className="launches-eyebrow mb-4 flex items-center gap-3 text-[12px] font-bold uppercase tracking-[0.2em] text-ouro-texto">
               Lançamentos em Limeira
             </p>
-            <h2 className="text-[clamp(34px,3.6vw,54px)] font-extrabold leading-[1.04] tracking-[-0.025em] text-[#F5F8FB]">
+            <h2 className="text-[clamp(34px,3.6vw,54px)] font-extrabold leading-[1.04] tracking-[-0.025em] text-tinta">
               Grandes oportunidades
               <br />
-              <span className="font-instrument text-[1.16em] font-normal italic tracking-normal text-[#D9B55F]">
+              <span className="font-destaque text-[1.16em] font-normal italic tracking-normal text-bronze">
                 ao seu alcance
               </span>
             </h2>
           </div>
           <a
             href="#contato"
-            className="launches-all inline-flex min-h-[50px] items-center gap-2.5 rounded-full border border-[rgba(217,181,95,0.32)] px-6 py-[15px] text-[14.5px] font-bold text-[#D9B55F]"
+            className="launches-all btn-metal inline-flex min-h-[50px] items-center gap-2.5 rounded-full px-6 py-[15px] text-[14.5px] font-bold"
           >
             Ver todos os lançamentos
             <ArrowRight size={17} strokeWidth={2.2} aria-hidden="true" />
@@ -131,31 +131,33 @@ export default function Launches() {
 
             return (
               <article key={l.name} className="launch-card flex flex-col overflow-hidden">
-                <div className="relative aspect-[16/10] overflow-hidden">
+                <div className="launch-media relative aspect-[16/10] overflow-hidden">
                   <img src={l.img} alt={`Fachada do ${l.name}`} className="h-full w-full object-cover" />
                   <div className="launch-scrim absolute inset-0" aria-hidden="true" />
-                  <span className="absolute left-4 top-4 rounded-full bg-gradient-to-br from-[#EBCF8A] to-[#D9B55F] px-[13px] py-[7px] text-[10.5px] font-extrabold uppercase tracking-[0.14em] text-[#1A1407]">
+                  <span className="absolute left-4 top-4 rounded-full bg-ouro px-[13px] py-[7px] text-[10.5px] font-extrabold uppercase tracking-[0.14em] text-tinta-sobre-ouro">
                     Lançamento
                   </span>
                   <div className="absolute inset-x-5 bottom-4">
-                    <h3 className="text-[25px] font-bold leading-tight text-white">{l.name}</h3>
-                    <p className="mt-1.5 flex items-center gap-1.5 text-[13.5px] font-medium text-[#C9D5E1]">
-                      <MapPin size={15} className="text-[#D9B55F]" aria-hidden="true" />
+                    <h3 className="text-[25px] font-bold leading-tight text-branco">{l.name}</h3>
+                    <p className="mt-1.5 flex items-center gap-1.5 text-[13.5px] font-medium text-branco/85">
+                      <MapPin size={15} className="text-champanhe" aria-hidden="true" />
                       {l.location}
                     </p>
                   </div>
                 </div>
 
                 <div className="flex flex-1 flex-col gap-5 px-[22px] pb-6 pt-[22px]">
-                  <ul className="grid grid-cols-3">
+                  <ul className="grid grid-cols-3 border-t border-linha pt-5">
                     {specs.map(({ icon: Icon, value, label }, i) => (
                       <li
                         key={label}
-                        className={`flex flex-col gap-1.5 ${i > 0 ? "border-l border-[rgba(255,255,255,0.09)] pl-4" : ""} ${i < specs.length - 1 ? "pr-4" : ""}`}
+                        className={`flex flex-col gap-1.5 ${i > 0 ? "border-l border-linha pl-4" : ""} ${i < specs.length - 1 ? "pr-4" : ""}`}
                       >
-                        <Icon size={18} className="text-[#D9B55F]" aria-hidden="true" />
-                        <span className="text-[15px] font-bold text-[#ECF2F8]">{value}</span>
-                        <span className="text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#93A5B8]">
+                        <span className="icon-badge icon-badge--sm mb-1">
+                          <Icon size={15} strokeWidth={2.2} aria-hidden="true" />
+                        </span>
+                        <span className="text-[15px] font-bold text-tinta">{value}</span>
+                        <span className="text-[10.5px] font-bold uppercase tracking-[0.12em] text-tinta-3">
                           {label}
                         </span>
                       </li>
@@ -167,7 +169,7 @@ export default function Launches() {
                       href={waLink(l.name)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="launch-whats flex min-h-[50px] flex-1 items-center justify-center gap-2 rounded-xl px-4 text-[14.5px] font-extrabold text-[#06240F]"
+                      className="btn-whats flex min-h-[50px] flex-1 items-center justify-center gap-2 rounded-xl px-4 text-[14.5px] font-extrabold"
                     >
                       <MessageCircle size={19} strokeWidth={2.2} aria-hidden="true" />
                       Consultar no WhatsApp
@@ -176,7 +178,7 @@ export default function Launches() {
                       type="button"
                       onClick={() => openLaunch(l)}
                       aria-label={`Ver detalhes do ${l.name}`}
-                      className="launch-details flex h-[50px] w-[50px] shrink-0 items-center justify-center rounded-xl border border-[rgba(217,181,95,0.30)] text-[#D9B55F]"
+                      className="launch-details flex h-[50px] w-[50px] shrink-0 items-center justify-center rounded-xl border border-linha-forte text-ouro-texto"
                     >
                       <ArrowRight size={19} strokeWidth={2.2} aria-hidden="true" />
                     </button>

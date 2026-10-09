@@ -1,6 +1,7 @@
-import { useState } from "react";
-import { Home, Menu, MessageCircle, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Menu, MessageCircle, X } from "lucide-react";
 import InstagramIcon, { INSTAGRAM_URL } from "./InstagramIcon";
+import logo from "../assets/logo-pa.png";
 import "./Navbar.css";
 
 interface NavLink {
@@ -20,15 +21,21 @@ const WHATSAPP_URL = "https://wa.me/5519983153649";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <>
-      <header className="site-header">
+      <header className={`site-header${scrolled ? " site-header--scrolled" : ""}`}>
         <div className="site-header__inner">
           <a href="#top" className="brand">
-            <span className="brand__mark">
-              <Home size={21} strokeWidth={1.6} aria-hidden="true" />
-            </span>
+            <img src={logo} alt="" className="brand__mark" width={44} height={46} />
             <span className="brand__text">
               <span className="brand__name">PHELIPE ASSIS</span>
               <span className="brand__role">CORRETOR DE IMÓVEIS</span>
@@ -53,7 +60,7 @@ export default function Navbar() {
             >
               <InstagramIcon size={18} />
             </a>
-            <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="btn-outline">
+            <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="btn-outline btn-whats">
               <MessageCircle size={17} strokeWidth={1.7} aria-hidden="true" />
               Falar no WhatsApp
             </a>
@@ -84,7 +91,7 @@ export default function Navbar() {
       </header>
 
       <div className="mobile-bar">
-        <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="btn-outline">
+        <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="btn-outline btn-whats">
           <MessageCircle size={18} strokeWidth={1.7} aria-hidden="true" />
           Falar no WhatsApp
         </a>

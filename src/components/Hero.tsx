@@ -65,7 +65,9 @@ export default function Hero() {
           <ul className="chips">
             {chips.map(({ icon: Icon, label }) => (
               <li key={label} className="chip">
-                <Icon size={17} strokeWidth={1.7} aria-hidden="true" />
+                <span className="icon-badge icon-badge--sm">
+                  <Icon size={15} strokeWidth={2.2} aria-hidden="true" />
+                </span>
                 {label}
               </li>
             ))}
@@ -84,10 +86,6 @@ export default function Hero() {
 
         <div className="hero__aside">
           <div id="contato" className="lead-card">
-            <p className="status">
-              <span className="status__dot" aria-hidden="true" />
-              ATENDENDO HOJE · [SEG A SÁB, 9H–19H]
-            </p>
             <h2 className="lead-card__title">Agende uma visita</h2>
             <p className="lead-card__sub">
               Me conte o que você procura e eu retorno pelo WhatsApp com as melhores opções.
@@ -121,16 +119,18 @@ export default function Hero() {
 
               <div className="field">
                 <label htmlFor="lead-interest">O que você procura</label>
-                <select id="lead-interest" name="interest" required defaultValue="">
-                  <option value="" disabled>
-                    Selecione uma opção
-                  </option>
-                  {interestOptions.map((option) => (
-                    <option key={option} value={option}>
-                      {option}
+                <div className="field__select">
+                  <select id="lead-interest" name="interest" required defaultValue="">
+                    <option value="" disabled>
+                      Selecione uma opção
                     </option>
-                  ))}
-                </select>
+                    {interestOptions.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
 
               <button type="submit" className="btn-primary">
@@ -139,7 +139,7 @@ export default function Hero() {
               </button>
 
               <p className="privacy">
-                <Lock size={15} strokeWidth={1.7} aria-hidden="true" />
+                <Lock size={15} strokeWidth={2.2} aria-hidden="true" />
                 Seus dados vão direto para o WhatsApp do corretor. Sem cadastro e sem spam.
               </p>
             </form>

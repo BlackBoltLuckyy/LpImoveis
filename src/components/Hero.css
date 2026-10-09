@@ -1,19 +1,9 @@
 .hero {
-  --bg: #0a0f16;
-  --surface: #111a25;
-  --field: #0a121b;
-  --gold: #e3be86;
-  --text: #f4f1eb;
-  --text-2: #b2bcc9;
-  --text-3: #94a0ae;
-  --green: #5dc487;
-
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  background: var(--bg);
-  color: var(--text);
-  font-family: "Archivo", sans-serif;
+  background: var(--branco);
+  color: var(--tinta);
 }
 
 /* Malha de linhas douradas, saindo do topo-esquerdo */
@@ -23,11 +13,12 @@
   inset: 0;
   z-index: -2;
   background-image:
-    linear-gradient(rgba(227, 190, 134, 0.055) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(227, 190, 134, 0.055) 1px, transparent 1px);
+    linear-gradient(rgb(var(--ouro-rgb) / 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--ouro-rgb) / 0.14) 1px, transparent 1px);
   background-size: 96px 96px;
-  -webkit-mask-image: radial-gradient(ellipse 85% 90% at 0% 0%, #000 0%, rgba(0, 0, 0, 0.55) 45%, transparent 85%);
-  mask-image: radial-gradient(ellipse 85% 90% at 0% 0%, #000 0%, rgba(0, 0, 0, 0.55) 45%, transparent 85%);
+  /* Máscara: só o canal alfa importa, não é cor da paleta */
+  -webkit-mask-image: radial-gradient(ellipse 85% 90% at 0% 0%, black 0%, rgb(0 0 0 / 0.55) 45%, transparent 85%);
+  mask-image: radial-gradient(ellipse 85% 90% at 0% 0%, black 0%, rgb(0 0 0 / 0.55) 45%, transparent 85%);
 }
 
 /* Luz quente atrás do formulário */
@@ -39,7 +30,7 @@
   z-index: -1;
   width: 900px;
   height: 900px;
-  background: radial-gradient(circle, rgba(227, 190, 134, 0.16), transparent 65%);
+  background: radial-gradient(circle, rgb(var(--ouro-rgb) / 0.16), transparent 65%);
   pointer-events: none;
 }
 
@@ -72,7 +63,7 @@
   font-weight: 600;
   letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--ouro-texto);
 }
 
 .eyebrow::before {
@@ -80,22 +71,25 @@
   width: 34px;
   height: 1px;
   flex-shrink: 0;
-  background: var(--gold);
+  background: var(--ouro);
 }
 
 .hero__title {
   margin: 0;
-  font-family: "Instrument Serif", serif;
-  font-weight: 400;
-  font-size: clamp(46px, 6vw, 82px);
-  line-height: 1.02;
-  letter-spacing: -0.01em;
-  color: var(--text);
+  font-weight: 800;
+  font-size: clamp(42px, 5.2vw, 70px);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  color: var(--tinta);
 }
 
 .hero__title em {
+  font-family: var(--fonte-destaque);
+  font-weight: 400;
+  font-size: 1.12em;
+  letter-spacing: -0.01em;
   font-style: italic;
-  color: var(--gold);
+  color: var(--bronze);
 }
 
 .hero__lead {
@@ -103,7 +97,7 @@
   margin: 28px 0 0;
   font-size: 17.5px;
   line-height: 1.68;
-  color: var(--text-2);
+  color: var(--tinta-2);
 }
 
 .chips {
@@ -119,26 +113,25 @@
   display: inline-flex;
   align-items: center;
   gap: 9px;
-  min-height: 40px;
-  padding: 0 16px;
-  border: 1px solid rgba(227, 190, 134, 0.22);
+  min-height: 44px;
+  padding: 0 16px 0 6px;
+  border: 1px solid rgb(var(--bronze-rgb) / 0.3);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--superficie);
   font-size: 14px;
   font-weight: 500;
-  color: var(--text);
+  color: var(--tinta);
 }
 
-.chip svg {
-  color: var(--gold);
-  flex-shrink: 0;
+.chip .icon-badge {
+  box-shadow: inset 0 1px 0 rgb(var(--branco-rgb) / 0.75);
 }
 
 .hero__rule {
   height: 1px;
   margin: 38px 0 26px;
   border: 0;
-  background: linear-gradient(90deg, rgba(227, 190, 134, 0.55), transparent 70%);
+  background: linear-gradient(90deg, var(--ouro), transparent 70%);
 }
 
 .signature {
@@ -151,10 +144,10 @@
 
 .signature__quote {
   margin: 0;
-  font-family: "Instrument Serif", serif;
+  font-family: var(--fonte-destaque);
   font-style: italic;
   font-size: 22px;
-  color: var(--gold);
+  color: var(--ouro-texto);
 }
 
 .text-link {
@@ -164,64 +157,40 @@
   min-height: 44px;
   font-size: 14.5px;
   font-weight: 500;
-  color: var(--text-2);
+  color: var(--tinta-3);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 .text-link:hover,
 .text-link:focus-visible {
-  color: var(--gold);
+  color: var(--ouro-texto);
 }
 
 /* Card do formulário */
 .lead-card {
   padding: 34px 32px 28px;
-  border: 1px solid transparent;
+  border: 1px solid var(--linha);
   border-radius: 19px;
-  background:
-    linear-gradient(var(--surface), var(--surface)) padding-box,
-    linear-gradient(135deg, rgba(227, 190, 134, 0.7), rgba(227, 190, 134, 0.14) 38%, rgba(255, 255, 255, 0.07) 100%) border-box;
-  box-shadow: 0 40px 70px -28px rgba(0, 0, 0, 0.85);
+  background: var(--branco);
+  box-shadow: var(--sombra-form);
   scroll-margin-top: 100px;
 }
 
-.status {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  padding: 7px 13px;
-  border: 1px solid rgba(93, 196, 135, 0.28);
-  border-radius: 999px;
-  background: rgba(93, 196, 135, 0.07);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  color: var(--green);
-}
-
-.status__dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--green);
-  box-shadow: 0 0 0 4px rgba(93, 196, 135, 0.18);
-}
-
 .lead-card__title {
-  margin: 20px 0 0;
-  font-family: "Instrument Serif", serif;
-  font-weight: 400;
-  font-size: 32px;
-  line-height: 1.1;
-  color: var(--text);
+  margin: 0;
+  font-weight: 800;
+  font-size: 28px;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--tinta);
 }
 
 .lead-card__sub {
   margin: 8px 0 0;
   font-size: 14.5px;
   line-height: 1.55;
-  color: var(--text-2);
+  color: var(--tinta-2);
 }
 
 .lead-form {
@@ -238,11 +207,11 @@
 }
 
 .field label {
-  font-size: 11.5px;
+  font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--text-2);
+  color: var(--tinta-2);
 }
 
 .field input,
@@ -250,24 +219,23 @@
   width: 100%;
   height: 52px;
   padding: 0 16px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid var(--linha-input);
   border-radius: 11px;
-  background-color: var(--field);
+  background-color: var(--branco);
   font: inherit;
   font-size: 15.5px;
-  color: var(--text);
-  outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  color: var(--tinta);
+  transition: border-color 0.2s ease;
 }
 
 .field input::placeholder {
-  color: var(--text-3);
+  color: var(--placeholder);
 }
 
-.field input:focus,
-.field select:focus {
-  border-color: var(--gold);
-  box-shadow: 0 0 0 3px rgba(227, 190, 134, 0.16);
+.field input:focus-visible,
+.field select:focus-visible {
+  outline: 2px solid var(--ouro-texto);
+  outline-offset: 2px;
 }
 
 .field select {
@@ -275,18 +243,34 @@
   -webkit-appearance: none;
   padding-right: 44px;
   cursor: pointer;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23E3BE86' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 16px center;
+}
+
+/* Seta do select: máscara SVG pintada com o token, sem cor fixa no arquivo */
+.field__select {
+  position: relative;
+}
+
+.field__select::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  width: 18px;
+  height: 18px;
+  transform: translateY(-50%);
+  background: var(--tinta-3);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") center / contain no-repeat;
+  pointer-events: none;
 }
 
 .field select:invalid {
-  color: var(--text-3);
+  color: var(--placeholder);
 }
 
 .field option {
-  background: var(--field);
-  color: var(--text);
+  background: var(--branco);
+  color: var(--tinta);
 }
 
 .btn-primary {
@@ -298,11 +282,12 @@
   gap: 10px;
   border: 0;
   border-radius: 11px;
-  background: var(--gold);
+  background: var(--gradiente-metal);
+  box-shadow: var(--sombra-ouro);
   font: inherit;
   font-size: 15.5px;
   font-weight: 700;
-  color: #0a0f16;
+  color: var(--tinta-sobre-ouro);
   cursor: pointer;
   transition: filter 0.2s ease, transform 0.2s ease;
 }
@@ -312,7 +297,7 @@
 }
 
 .btn-primary:hover {
-  filter: brightness(1.06);
+  filter: brightness(0.94);
   transform: translateY(-1px);
 }
 
@@ -321,7 +306,7 @@
 }
 
 .btn-primary:focus-visible {
-  outline: 2px solid var(--text);
+  outline: 2px solid var(--ouro-texto);
   outline-offset: 3px;
 }
 
@@ -332,13 +317,13 @@
   margin: 0;
   font-size: 13px;
   line-height: 1.5;
-  color: var(--text-3);
+  color: var(--tinta-3);
 }
 
 .privacy svg {
   flex-shrink: 0;
   margin-top: 2px;
-  color: var(--gold);
+  color: var(--ouro-escuro);
 }
 
 .lead-card__alt {
@@ -348,9 +333,9 @@
   gap: 2px 8px;
   margin: 22px 0 0;
   padding-top: 14px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid var(--linha);
   font-size: 14px;
-  color: var(--text-3);
+  color: var(--tinta-3);
 }
 
 .lead-card__alt a {
@@ -359,7 +344,7 @@
   gap: 6px;
   min-height: 44px;
   font-weight: 600;
-  color: var(--gold);
+  color: var(--ouro-texto);
   text-decoration: none;
 }
 
@@ -375,7 +360,7 @@
   }
 
   .hero__title {
-    font-size: 50px;
+    font-size: 42px;
   }
 
   .hero__lead {

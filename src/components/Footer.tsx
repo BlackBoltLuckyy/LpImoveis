@@ -8,14 +8,14 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer className="bg-navy-900 px-8 py-14">
+    <footer className="bg-tinta px-8 py-14 text-creme">
       <div className="mx-auto max-w-6xl">
         <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
           <div className="text-center sm:text-left">
-            <p className="font-sora text-sm font-bold tracking-wide text-white">
+            <p className="text-sm font-bold tracking-wide text-creme">
               PHELIPE ASSIS
             </p>
-            <p className="mt-1 text-xs text-white/50">
+            <p className="mt-1 text-xs text-creme-2">
               © {new Date().getFullYear()} Phelipe Assis Imóveis. Todos os direitos reservados.
             </p>
           </div>
@@ -28,7 +28,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label={social.label}
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-gold hover:text-gold"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-creme/20 text-ouro transition-colors hover:border-ouro hover:text-champanhe"
               >
                 <social.icon size={18} />
               </a>

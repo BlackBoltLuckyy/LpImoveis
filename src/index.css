@@ -2,19 +2,122 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * Paleta da marca (tema claro, derivado da logo).
+ * Única fonte de cores do projeto: CSS e Tailwind leem daqui.
+ * Os canais *-rgb existem só para as cores usadas com transparência.
+ */
+:root {
+  color-scheme: light;
+
+  --branco: #ffffff;
+  --superficie: #faf8f4;
+  --superficie-2: #f2eee6;
+  --superficie-3: #e7e1d5;
+  --linha: #eae6de;
+  --linha-forte: #d8d2c6;
+  --linha-input: #8e8a80; /* borda de campo: 3,4:1, linha-forte dá só 1,5:1 */
+  --tinta: #1a1a18;
+  --tinta-2: #4a463e;
+  --tinta-3: #6e6a60;
+  --placeholder: var(--tinta-3); /* 5,4:1; #8e8a80 daria 3,4:1 */
+  --ouro: #cfa24d; /* só preenchimento e gráfico, nunca texto */
+  --ouro-texto: #8a6420; /* todo texto dourado */
+  --ouro-escuro: #6e4e14; /* traço dos ícones em selo dourado (5,5:1 sobre o selo) */
+  --bronze: #b38432; /* ícones, bordas douradas, display grande em ouro */
+  --champanhe: #f0d183;
+  --tinta-sobre-ouro: #16130c;
+  --verde-whats: #1e9e54;
+  --verde-texto: #176b3c;
+  --verde-claro: #e8f6ec;
+  --creme: #f7f3ec; /* texto sobre o rodapé escuro */
+  --creme-2: #aca89f;
+
+  --branco-rgb: 255 255 255;
+  --tinta-rgb: 26 26 24;
+  --ouro-rgb: 207 162 77;
+  --bronze-rgb: 179 132 50;
+  --creme-rgb: 247 243 236;
+
+  --fonte: "Manrope", system-ui, sans-serif;
+  --fonte-destaque: "Instrument Serif", Georgia, serif; /* só nos itálicos de destaque */
+
+  --gradiente-metal: linear-gradient(180deg, var(--champanhe) 0%, var(--ouro) 52%, var(--bronze) 100%);
+  --sombra-ouro: 0 8px 24px rgb(var(--bronze-rgb) / 0.22);
+  --sombra-card: 0 10px 28px rgb(var(--tinta-rgb) / 0.07);
+  --sombra-card-hover: 0 18px 40px rgb(var(--tinta-rgb) / 0.12);
+  --sombra-form: 0 12px 32px rgb(var(--tinta-rgb) / 0.08);
+}
+
 body {
-  @apply bg-navy font-jakarta text-white antialiased;
+  @apply bg-branco font-sans text-tinta antialiased;
+}
+
+/* Botões e selos de ícone compartilhados entre as seções */
+@layer components {
+  /*
+   * Selo dourado para ícones decorativos: fundo em ouro translúcido, borda bronze,
+   * brilho no topo (o bisel da logo) e traço em ouro-escuro.
+   */
+  .icon-badge {
+    display: inline-grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    border: 1px solid rgb(var(--bronze-rgb) / 0.7);
+    background: linear-gradient(180deg, rgb(var(--ouro-rgb) / 0.4), rgb(var(--ouro-rgb) / 0.2));
+    box-shadow:
+      inset 0 1px 0 rgb(var(--branco-rgb) / 0.7),
+      0 2px 8px rgb(var(--bronze-rgb) / 0.22);
+    color: var(--ouro-escuro);
+  }
+  .icon-badge--sm {
+    width: 30px;
+    height: 30px;
+  }
+  .icon-badge--lg {
+    width: 48px;
+    height: 48px;
+  }
+
+  .btn-metal {
+    background: var(--gradiente-metal);
+    color: var(--tinta-sobre-ouro);
+    box-shadow: var(--sombra-ouro);
+    transition:
+      filter 0.25s ease,
+      transform 0.25s ease;
+  }
+  .btn-metal:hover {
+    filter: brightness(0.94);
+  }
+
+  .btn-whats {
+    background: var(--branco);
+    border: 1px solid var(--linha-forte);
+    color: var(--tinta);
+    transition:
+      border-color 0.25s ease,
+      background-color 0.25s ease;
+  }
+  .btn-whats:hover {
+    border-color: var(--tinta-3);
+    background: var(--superficie);
+  }
+  .btn-whats svg {
+    color: var(--verde-whats);
+  }
 }
 
 /* Seção de lançamentos */
 @layer components {
+  /* Fundo branco: sobre superficie-2 o bronze do título cai para 2,9:1 */
   .launches {
-    background:
-      radial-gradient(1100px 520px at 88% -14%, rgba(217, 181, 95, 0.13), transparent 62%),
-      radial-gradient(900px 500px at 4% 108%, rgba(60, 110, 170, 0.16), transparent 60%),
-      #0b131d;
-    border-top: 1px solid rgba(217, 181, 95, 0.14);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background: var(--branco);
+    border-top: 1px solid var(--linha);
+    border-bottom: 1px solid var(--linha);
   }
 
   .launches-eyebrow::before {
@@ -22,27 +125,21 @@ body {
     width: 34px;
     height: 2px;
     border-radius: 2px;
-    background: linear-gradient(90deg, #d9b55f, #ebcf8a);
+    background: var(--ouro);
   }
 
-  .launches-all {
-    transition: background-color 0.3s ease;
-  }
   .launches-all svg {
     transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
-  }
-  .launches-all:hover {
-    background-color: rgba(217, 181, 95, 0.12);
   }
   .launches-all:hover svg {
     transform: translateX(5px);
   }
 
   .launch-card {
-    background: linear-gradient(180deg, #131e2b, #0e1722);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: var(--branco);
+    border: 1px solid var(--linha);
     border-radius: 20px;
-    box-shadow: 0 18px 44px -28px rgba(0, 0, 0, 0.9);
+    box-shadow: var(--sombra-card);
     transition:
       transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1),
       border-color 0.4s cubic-bezier(0.2, 0.7, 0.2, 1),
@@ -50,8 +147,8 @@ body {
   }
   .launch-card:hover {
     transform: translateY(-7px);
-    border-color: rgba(217, 181, 95, 0.4);
-    box-shadow: 0 30px 64px -28px rgba(0, 0, 0, 0.95);
+    border-color: var(--linha-forte);
+    box-shadow: var(--sombra-card-hover);
   }
   .launch-card img {
     transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -60,32 +157,33 @@ body {
     transform: scale(1.05);
   }
 
+  /* Contém a foto no fundo claro */
+  .launch-media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 0 1px rgb(var(--tinta-rgb) / 0.06);
+    pointer-events: none;
+  }
+
+  /* Gradiente de leitura para o nome em branco sobre a foto */
   .launch-scrim {
     background: linear-gradient(
       to top,
-      rgba(8, 14, 21, 0.97) 2%,
-      rgba(8, 14, 21, 0.72) 26%,
-      rgba(8, 14, 21, 0.1) 58%,
-      rgba(8, 14, 21, 0.28) 100%
+      rgb(var(--tinta-rgb) / 0.9) 2%,
+      rgb(var(--tinta-rgb) / 0.62) 26%,
+      rgb(var(--tinta-rgb) / 0.08) 58%,
+      rgb(var(--tinta-rgb) / 0.2) 100%
     );
   }
 
-  .launch-whats {
-    background: linear-gradient(180deg, #2ee06e, #1fbe5c);
-    transition:
-      filter 0.25s ease,
-      transform 0.25s ease;
-  }
-  .launch-whats:hover {
-    filter: brightness(1.08);
-    transform: translateY(-1px);
-  }
-
   .launch-details {
-    transition: background-color 0.25s ease, border-color 0.25s ease;
+    transition:
+      background-color 0.25s ease,
+      border-color 0.25s ease;
   }
   .launch-details:hover {
-    background-color: rgba(217, 181, 95, 0.12);
-    border-color: rgba(217, 181, 95, 0.5);
+    background-color: var(--superficie);
+    border-color: var(--bronze);
   }
 }

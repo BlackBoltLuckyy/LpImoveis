@@ -20,7 +20,7 @@ interface Rect {
 interface CityWindow {
   x: number;
   y: number;
-  opacity: number;
+  lit: boolean;
 }
 
 const CITY_W = 1440;
@@ -54,8 +54,8 @@ function buildWindows(rand: () => number, buildings: Rect[], density: number) {
     for (let y = b.y + 18; y + 12 < CITY_H - 10; y += 26) {
       for (let x = b.x + 14; x + 7 < b.x + b.w - 10; x += 19) {
         const roll = rand();
-        if (roll < density * 0.18) windows.push({ x, y, opacity: 0.5 });
-        else if (roll < density) windows.push({ x, y, opacity: 0.26 });
+        if (roll < density * 0.18) windows.push({ x, y, lit: true });
+        else if (roll < density) windows.push({ x, y, lit: false });
       }
     }
   }
@@ -79,28 +79,44 @@ function CitySkyline() {
     >
       <defs>
         <linearGradient id="cta-city-fade" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#0A0E13" />
-          <stop offset="0.55" stopColor="#0A0E13" stopOpacity="0" />
+          <stop offset="0" className="cta__city-fade" />
+          <stop offset="0.55" className="cta__city-fade" stopOpacity="0" />
         </linearGradient>
       </defs>
-      <g fill="#0E151D">
+      <g className="cta__city-back">
         {backRow.map((r, i) => (
           <rect key={i} x={r.x} y={r.y} width={r.w} height={r.h} />
         ))}
       </g>
-      <g fill="#E3B778">
+      <g>
         {backWindows.map((w, i) => (
-          <rect key={i} x={w.x} y={w.y} width={7} height={12} opacity={w.opacity} />
+          <rect
+            key={i}
+            className={w.lit ? "cta__city-window cta__city-window--lit" : "cta__city-window"}
+            x={w.x}
+            y={w.y}
+            width={7}
+            height={12}
+            opacity={w.lit ? 0.75 : 0.45}
+          />
         ))}
       </g>
-      <g fill="#131C25">
+      <g className="cta__city-front">
         {frontRow.map((r, i) => (
           <rect key={i} x={r.x} y={r.y} width={r.w} height={r.h} />
         ))}
       </g>
-      <g fill="#E3B778">
+      <g>
         {frontWindows.map((w, i) => (
-          <rect key={i} x={w.x} y={w.y} width={7} height={12} opacity={w.opacity} />
+          <rect
+            key={i}
+            className={w.lit ? "cta__city-window cta__city-window--lit" : "cta__city-window"}
+            x={w.x}
+            y={w.y}
+            width={7}
+            height={12}
+            opacity={w.lit ? 0.75 : 0.45}
+          />
         ))}
       </g>
       <rect width={CITY_W} height={CITY_H} fill="url(#cta-city-fade)" />
@@ -138,7 +154,9 @@ export default function CtaBand() {
         <ul className="cta__seals">
           {seals.map(({ icon: Icon, label }) => (
             <li key={label} className="cta__seal">
-              <Icon size={22} strokeWidth={1.6} aria-hidden="true" />
+              <span className="icon-badge">
+                <Icon size={19} strokeWidth={2.2} aria-hidden="true" />
+              </span>
               {label}
             </li>
           ))}
